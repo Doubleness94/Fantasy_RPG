@@ -7,12 +7,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform characterBody;
     [SerializeField]
-    private float applySpeed;
+    private float speed;
     [SerializeField]
     private Transform cameraArm;
 
     [SerializeField]
     private float LookSensitivity;
+
+    Rigidbody myRigid;
+    Animator anim;
+
+    void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+        myRigid = GetComponent<Rigidbody>();
+    }
 
 
     // Update is called once per frame
@@ -50,7 +59,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
 
         characterBody.forward = moveDir;
-        transform.position += moveDir * Time.deltaTime * applySpeed;
+        transform.position += moveDir * Time.deltaTime * speed;
     }
 
 }
